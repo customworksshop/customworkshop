@@ -55,6 +55,15 @@
         .glow-effect {
             box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.25);
         }
+        /* Custom styled native color picker wrapper */
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+            border-radius: 6px;
+        }
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body class="bg-[#0B0F17] text-slate-200 font-sans antialiased selection:bg-amber-500 selection:text-black">
@@ -118,7 +127,7 @@
                 </h1>
                 
                 <p class="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
-                    Custom built directly at our workshop using premium grade steel, anti-slip footings, and solid craftsmanship. Select your equipment, customize quantity, and confirm directly on WhatsApp.
+                    Custom built directly at our workshop using heavy-duty construction, anti-slip footings, and solid craftsmanship. Select your equipment, choose custom colors upon order, and confirm directly on WhatsApp.
                 </p>
 
                 <!-- Dedicated Delivery Coverage Card -->
@@ -153,8 +162,8 @@
                         <span class="text-xs font-medium text-slate-300">Ambur & Nearby</span>
                     </div>
                     <div class="bg-[#161C27]/80 border border-[#242F42] rounded-xl p-3 flex items-center gap-3">
-                        <i data-lucide="badge-check" class="w-5 h-5 text-amber-500"></i>
-                        <span class="text-xs font-medium text-slate-300">Workshop Direct</span>
+                        <i data-lucide="palette" class="w-5 h-5 text-amber-500"></i>
+                        <span class="text-xs font-medium text-slate-300">Any Color Paint</span>
                     </div>
                     <div class="bg-[#161C27]/80 border border-[#242F42] rounded-xl p-3 flex items-center gap-3">
                         <i data-lucide="message-circle" class="w-5 h-5 text-amber-500"></i>
@@ -174,59 +183,95 @@
                 <p class="text-sm text-slate-400 mt-2 md:mt-0">Click "Order Now" for instant single purchase or add multiple to cart.</p>
             </div>
 
-            <!-- Products Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            <!-- Products Grid: 3-column responsive layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Product 1 Card: 5 ft Stool -->
+                <!-- Product 1 Card: Stool with Multi-Size Options -->
                 <div class="bg-[#161C27] border border-[#242F42] rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between group hover:border-amber-500/50 transition-all duration-300">
                     <div>
                         <!-- Image Container with fallback -->
-                        <div class="relative h-80 sm:h-96 w-full bg-[#0D121B] overflow-hidden flex items-center justify-center p-4">
+                        <div class="relative h-72 sm:h-80 w-full bg-[#0D121B] overflow-hidden flex items-center justify-center p-4">
                             <img 
+                                id="p1Image"
                                 src="https://drive.google.com/thumbnail?id=1fUfK9uaHdeDhmH9gC222ws7pveDu4v_6&sz=w1000" 
-                                alt="5 ft stool" 
+                                alt="Fabricated Workshop Stool" 
                                 class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                                onerror="this.onerror=null; this.src='https://placehold.co/800x600/161C27/F59E0B?text=5+FT+Stool';">
-                            <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-amber-400 border border-amber-500/20">
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x600/161C27/F59E0B?text=Workshop+Stool';">
+                            <div id="p1Badge" class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-amber-400 border border-amber-500/20">
                                 Best For Mechanics & Workshops
                             </div>
                         </div>
 
                         <!-- Card Body -->
-                        <div class="p-6 sm:p-8">
-                            <div class="flex justify-between items-start">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4">
                                 <div>
-                                    <h3 class="text-2xl font-bold font-display uppercase text-white tracking-wide">5 FT Stool</h3>
+                                    <h3 id="p1TitleDisplay" class="text-xl font-bold font-display uppercase text-white tracking-wide">4.5 FT Stool</h3>
                                     <p class="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
                                         <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Heavy pipe reinforcement & non-slip top
                                     </p>
                                 </div>
-                                <div class="text-right">
-                                    <span class="text-2xl font-black text-amber-400 font-display">₹2,499</span>
+                                <div class="text-right shrink-0">
+                                    <span id="p1PriceDisplay" class="text-2xl font-black text-amber-400 font-display">₹2,499</span>
                                     <span class="block text-[11px] text-slate-400">Incl. all taxes</span>
                                 </div>
                             </div>
 
-                            <p class="text-sm text-slate-300 mt-4 leading-relaxed">
-                                Sturdy 5-foot industrial stool engineered for garage work, elevated welding, and tool access. Features cross-braced heavy metal tubular legs and corrosion-resistant powder coat.
+                            <!-- Height / Size Selector Options -->
+                            <div class="mt-5 p-3 bg-[#0B0F17] border border-[#242F42] rounded-xl">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                                        <i data-lucide="ruler" class="w-3.5 h-3.5"></i> Select Height & Size:
+                                    </span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button 
+                                        type="button" 
+                                        onclick="selectStoolVariant('2.5 ft stool', 1499, '2.5 FT')" 
+                                        id="btnVariant-2.5" 
+                                        class="stool-variant-btn py-2 px-1.5 rounded-lg border border-[#242F42] bg-[#161C27] hover:border-amber-500/60 text-center transition flex flex-col items-center">
+                                        <span class="text-xs font-bold text-white">2.5 FT</span>
+                                        <span class="text-[11px] font-semibold text-amber-400 mt-0.5">₹1,499</span>
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        onclick="selectStoolVariant('4.5 ft stool', 2499, '4.5 FT')" 
+                                        id="btnVariant-4.5" 
+                                        class="stool-variant-btn py-2 px-1.5 rounded-lg border-2 border-amber-500 bg-amber-500/10 text-center transition flex flex-col items-center shadow-lg shadow-amber-500/10">
+                                        <span class="text-xs font-bold text-white">4.5 FT</span>
+                                        <span class="text-[11px] font-bold text-amber-400 mt-0.5">₹2,499</span>
+                                    </button>
+                                    <button 
+                                        type="button" 
+                                        onclick="selectStoolVariant('7 ft stool', 3499, '7 FT')" 
+                                        id="btnVariant-7" 
+                                        class="stool-variant-btn py-2 px-1.5 rounded-lg border border-[#242F42] bg-[#161C27] hover:border-amber-500/60 text-center transition flex flex-col items-center">
+                                        <span class="text-xs font-bold text-white">7 FT</span>
+                                        <span class="text-[11px] font-semibold text-amber-400 mt-0.5">₹3,499</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed">
+                                Heavy-duty fabricated industrial stool engineered for garage work, elevated welding, and tool access. Features cross-braced tubular legs.
                             </p>
 
                             <!-- Specifications -->
-                            <div class="mt-4 pt-4 border-t border-[#242F42] flex flex-wrap gap-4 text-xs text-slate-400">
-                                <span><strong class="text-white">Height:</strong> 5 Feet</span>
-                                <span><strong class="text-white">Capacity:</strong> 180+ KG</span>
-                                <span><strong class="text-white">Optional Painting:</strong> +₹100/pc (Multi-Color)</span>
-                                <span><strong class="text-white">Delivery:</strong> Ambur, Pernambut & Alinjikuppam</span>
+                            <div class="mt-4 pt-4 border-t border-[#242F42] flex flex-col gap-1.5 text-xs text-slate-400">
+                                <div><strong class="text-white">Height:</strong> <span id="p1HeightSpec">4.5 Feet</span></div>
+                                <div><strong class="text-white">Capacity:</strong> 180+ KG</div>
+                                <div><strong class="text-white">Optional Painting:</strong> +₹200/pc (Any Color)</div>
+                                <div><strong class="text-white">Delivery:</strong> Ambur, Pernambut & Alinjikuppam</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card Actions -->
-                    <div class="p-6 sm:p-8 pt-0 grid grid-cols-2 gap-3">
-                        <button onclick="addToCart('5 ft stool', 2499, 'https://drive.google.com/thumbnail?id=1fUfK9uaHdeDhmH9gC222ws7pveDu4v_6&sz=w1000')" class="w-full py-3 px-4 rounded-xl font-semibold text-xs tracking-wider uppercase bg-[#0B0F17] hover:bg-[#20293A] text-slate-200 border border-[#242F42] transition flex items-center justify-center gap-2">
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+                        <button onclick="addSelectedStoolToCart()" class="w-full py-2.5 px-3 rounded-xl font-semibold text-xs tracking-wider uppercase bg-[#0B0F17] hover:bg-[#20293A] text-slate-200 border border-[#242F42] transition flex items-center justify-center gap-1.5">
                             <i data-lucide="plus-circle" class="w-4 h-4"></i> Add To Cart
                         </button>
-                        <button onclick="openInstantOrder('5 ft stool', 2499)" class="w-full py-3 px-4 rounded-xl font-bold text-xs tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20">
+                        <button onclick="orderSelectedStoolNow()" class="w-full py-2.5 px-3 rounded-xl font-bold text-xs tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black transition flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20">
                             <i data-lucide="zap" class="w-4 h-4"></i> Order Now
                         </button>
                     </div>
@@ -236,7 +281,7 @@
                 <div class="bg-[#161C27] border border-[#242F42] rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between group hover:border-amber-500/50 transition-all duration-300">
                     <div>
                         <!-- Image Container with fallback -->
-                        <div class="relative h-80 sm:h-96 w-full bg-[#0D121B] overflow-hidden flex items-center justify-center p-4">
+                        <div class="relative h-72 sm:h-80 w-full bg-[#0D121B] overflow-hidden flex items-center justify-center p-4">
                             <img 
                                 src="https://drive.google.com/thumbnail?id=1PUeRqUdNBnfYL_qJRq-J8xVZzChxDgeX&sz=w1000" 
                                 alt="10 ft ladder" 
@@ -248,40 +293,95 @@
                         </div>
 
                         <!-- Card Body -->
-                        <div class="p-6 sm:p-8">
+                        <div class="p-6">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="text-2xl font-bold font-display uppercase text-white tracking-wide">10 FT Ladder</h3>
+                                    <h3 class="text-xl font-bold font-display uppercase text-white tracking-wide">10 FT Ladder</h3>
                                     <p class="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
                                         <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Ribbed step treads & rubber feet boots
                                     </p>
                                 </div>
-                                <div class="text-right">
+                                <div class="text-right shrink-0">
                                     <span class="text-2xl font-black text-amber-400 font-display">₹1,499</span>
                                     <span class="block text-[11px] text-slate-400">Incl. all taxes</span>
                                 </div>
                             </div>
 
-                            <p class="text-sm text-slate-300 mt-4 leading-relaxed">
+                            <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed">
                                 Professional 10-foot workshop ladder built for warehouses, construction work, and home repairs. Features deep grooved anti-slip rungs and firm footing stabilizers.
                             </p>
 
                             <!-- Specifications -->
-                            <div class="mt-4 pt-4 border-t border-[#242F42] flex flex-wrap gap-4 text-xs text-slate-400">
-                                <span><strong class="text-white">Height:</strong> 10 Feet</span>
-                                <span><strong class="text-white">Steps:</strong> Serrated Anti-Slip</span>
-                                <span><strong class="text-white">Optional Painting:</strong> +₹100/pc (Multi-Color)</span>
-                                <span><strong class="text-white">Delivery:</strong> Ambur, Pernambut & Alinjikuppam</span>
+                            <div class="mt-4 pt-4 border-t border-[#242F42] flex flex-col gap-1.5 text-xs text-slate-400">
+                                <div><strong class="text-white">Height:</strong> 10 Feet</div>
+                                <div><strong class="text-white">Steps:</strong> Serrated Anti-Slip</div>
+                                <div><strong class="text-white">Optional Painting:</strong> +₹200/pc (Any Color)</div>
+                                <div><strong class="text-white">Delivery:</strong> Ambur, Pernambut & Alinjikuppam</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card Actions -->
-                    <div class="p-6 sm:p-8 pt-0 grid grid-cols-2 gap-3">
-                        <button onclick="addToCart('10 ft ladder', 1499, 'https://drive.google.com/thumbnail?id=1PUeRqUdNBnfYL_qJRq-J8xVZzChxDgeX&sz=w1000')" class="w-full py-3 px-4 rounded-xl font-semibold text-xs tracking-wider uppercase bg-[#0B0F17] hover:bg-[#20293A] text-slate-200 border border-[#242F42] transition flex items-center justify-center gap-2">
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+                        <button onclick="addToCart('10 ft ladder', 1499, 'https://drive.google.com/thumbnail?id=1PUeRqUdNBnfYL_qJRq-J8xVZzChxDgeX&sz=w1000')" class="w-full py-2.5 px-3 rounded-xl font-semibold text-xs tracking-wider uppercase bg-[#0B0F17] hover:bg-[#20293A] text-slate-200 border border-[#242F42] transition flex items-center justify-center gap-1.5">
                             <i data-lucide="plus-circle" class="w-4 h-4"></i> Add To Cart
                         </button>
-                        <button onclick="openInstantOrder('10 ft ladder', 1499)" class="w-full py-3 px-4 rounded-xl font-bold text-xs tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20">
+                        <button onclick="openInstantOrder('10 ft ladder', 1499)" class="w-full py-2.5 px-3 rounded-xl font-bold text-xs tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black transition flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20">
+                            <i data-lucide="zap" class="w-4 h-4"></i> Order Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 Card: Stool and Chair -->
+                <div class="bg-[#161C27] border border-[#242F42] rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between group hover:border-amber-500/50 transition-all duration-300">
+                    <div>
+                        <!-- Image Container with Google Drive fallback -->
+                        <div class="relative h-72 sm:h-80 w-full bg-[#0D121B] overflow-hidden flex items-center justify-center p-4">
+                            <img 
+                                src="https://drive.google.com/thumbnail?id=1OmH6bCDvOU3KnPctsM41FBgb5eEDmUHE&sz=w1000" 
+                                alt="Stool and Chair" 
+                                class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x600/161C27/F59E0B?text=Stool+and+Chair';">
+                            <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-amber-400 border border-amber-500/20">
+                                Compact & Versatile
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold font-display uppercase text-white tracking-wide">Stool and Chair</h3>
+                                    <p class="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
+                                        <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> High strength pipe welding & steady base
+                                    </p>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <span class="text-2xl font-black text-amber-400 font-display">₹999</span>
+                                    <span class="block text-[11px] text-slate-400">Incl. all taxes</span>
+                                </div>
+                            </div>
+
+                            <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed">
+                                Compact multi-purpose workshop stool & chair fabricated for comfortable seating, low-level repair tasks, garages, and household usage.
+                            </p>
+
+                            <!-- Specifications -->
+                            <div class="mt-4 pt-4 border-t border-[#242F42] flex flex-col gap-1.5 text-xs text-slate-400">
+                                <div><strong class="text-white">Height:</strong> 1.75 Feet</div>
+                                <div><strong class="text-white">Top Width:</strong> 1 Foot</div>
+                                <div><strong class="text-white">Optional Painting:</strong> +₹200/pc (Any Color)</div>
+                                <div><strong class="text-white">Delivery:</strong> Ambur, Pernambut & Alinjikuppam</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Actions -->
+                    <div class="p-6 pt-0 grid grid-cols-2 gap-3">
+                        <button onclick="addToCart('Stool and Chair', 999, 'https://drive.google.com/thumbnail?id=1OmH6bCDvOU3KnPctsM41FBgb5eEDmUHE&sz=w1000')" class="w-full py-2.5 px-3 rounded-xl font-semibold text-xs tracking-wider uppercase bg-[#0B0F17] hover:bg-[#20293A] text-slate-200 border border-[#242F42] transition flex items-center justify-center gap-1.5">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Add To Cart
+                        </button>
+                        <button onclick="openInstantOrder('Stool and Chair', 999)" class="w-full py-2.5 px-3 rounded-xl font-bold text-xs tracking-wider uppercase bg-amber-500 hover:bg-amber-400 text-black transition flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20">
                             <i data-lucide="zap" class="w-4 h-4"></i> Order Now
                         </button>
                     </div>
@@ -302,13 +402,13 @@
                     <div class="bg-[#161C27] p-6 rounded-2xl border border-[#242F42] relative">
                         <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto mb-4 border border-amber-500/20 font-bold text-lg">1</div>
                         <h3 class="text-lg font-bold text-white mb-2">Pick Your Equipment</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Choose between our 5 ft stool or 10 ft ladder, or add multiple items to your cart.</p>
+                        <p class="text-xs text-slate-400 leading-relaxed">Choose stool height (2.5 FT, 4.5 FT, 7 FT), 10 FT ladder, or compact stool and chair.</p>
                     </div>
 
                     <div class="bg-[#161C27] p-6 rounded-2xl border border-[#242F42] relative">
                         <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto mb-4 border border-amber-500/20 font-bold text-lg">2</div>
-                        <h3 class="text-lg font-bold text-white mb-2">Select Your Delivery Area</h3>
-                        <p class="text-xs text-slate-400 leading-relaxed">Pick Ambur, Pernambut, or Alinjikuppam, and provide your exact door or site address.</p>
+                        <h3 class="text-lg font-bold text-white mb-2">Customize Any Color In The Order</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">In the order drawer, choose from 24+ world popular colors or use the custom color wheel for any exact shade.</p>
                     </div>
 
                     <div class="bg-[#161C27] p-6 rounded-2xl border border-[#242F42] relative">
@@ -361,7 +461,7 @@
                 <!-- Cart Items List -->
                 <div>
                     <h4 class="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-3">Selected Products</h4>
-                    <div id="cartItemsContainer" class="space-y-3">
+                    <div id="cartItemsContainer" class="space-y-4">
                         <!-- Populated by JS -->
                     </div>
                 </div>
@@ -388,7 +488,7 @@
                         <span class="text-sm font-bold text-white">Total Payable:</span>
                         <span id="cartTotalText" class="text-2xl font-display font-bold text-amber-400">₹0</span>
                     </div>
-                    <p class="text-[10px] text-slate-500 text-right">Fixed ₹100 delivery fee + optional ₹100/piece custom painting</p>
+                    <p class="text-[10px] text-slate-500 text-right">Fixed ₹100 delivery fee + optional ₹200/piece custom painting (any color)</p>
                 </div>
 
                 <!-- Checkout Customer Details Form -->
@@ -475,10 +575,89 @@
         // Target WhatsApp Configuration
         const WHATSAPP_NUMBER = "916380558420";
         const DELIVERY_CHARGE = 100;
-        const PAINTING_CHARGE_PER_PIECE = 100;
+        const PAINTING_CHARGE_PER_PIECE = 200;
+
+        // Expanded Global Paint Palette (Curated popular world shades)
+        const EXPANDED_PALETTE = [
+            // Dark & Grays
+            { name: 'Gloss Black',     hex: '#111827', border: '#475569', textDark: false },
+            { name: 'Charcoal Dark',   hex: '#374151', border: '#6B7280', textDark: false },
+            { name: 'Slate Gray',      hex: '#64748B', border: '#94A3B8', textDark: false },
+            { name: 'Silver Metallic', hex: '#CBD5E1', border: '#94A3B8', textDark: true },
+            { name: 'Pure White',      hex: '#FFFFFF', border: '#CBD5E1', textDark: true },
+            // Reds & Oranges
+            { name: 'Signal Red',      hex: '#DC2626', border: '#EF4444', textDark: false },
+            { name: 'Crimson Wine',    hex: '#881337', border: '#BE123C', textDark: false },
+            { name: 'Industrial Rust', hex: '#C2410C', border: '#EA580C', textDark: false },
+            { name: 'Vibrant Orange',  hex: '#F97316', border: '#FB923C', textDark: false },
+            { name: 'Safety Yellow',   hex: '#FACC15', border: '#EAB308', textDark: true },
+            { name: 'Golden Amber',    hex: '#D97706', border: '#F59E0B', textDark: false },
+            // Greens
+            { name: 'Forest Green',    hex: '#15803D', border: '#22C55E', textDark: false },
+            { name: 'Army Olive',      hex: '#3F6212', border: '#65A30D', textDark: false },
+            { name: 'Emerald Green',   hex: '#059669', border: '#10B981', textDark: false },
+            { name: 'Teal Green',      hex: '#0D9488', border: '#14B8A6', textDark: false },
+            // Blues
+            { name: 'Industrial Blue', hex: '#2563EB', border: '#60A5FA', textDark: false },
+            { name: 'Deep Navy',       hex: '#1E3A8A', border: '#3B82F6', textDark: false },
+            { name: 'Royal Blue',      hex: '#1D4ED8', border: '#60A5FA', textDark: false },
+            { name: 'Sky Cyan',        hex: '#0284C7', border: '#38BDF8', textDark: false },
+            { name: 'Aqua Turquoise',  hex: '#06B6D4', border: '#22D3EE', textDark: false },
+            // Purples, Pinks & Earth
+            { name: 'Deep Purple',     hex: '#7E22CE', border: '#A855F7', textDark: false },
+            { name: 'Hot Magenta',     hex: '#DB2777', border: '#F472B6', textDark: false },
+            { name: 'Industrial Brown',hex: '#78350F', border: '#B45309', textDark: false },
+            { name: 'Desert Sand',     hex: '#D6C096', border: '#B89B68', textDark: true }
+        ];
+
+        // Current Selected Variant for Product 1 (Stool)
+        let selectedStool = {
+            title: '4.5 ft stool',
+            price: 2499,
+            heightLabel: '4.5 FT',
+            image: 'https://drive.google.com/thumbnail?id=1fUfK9uaHdeDhmH9gC222ws7pveDu4v_6&sz=w1000'
+        };
 
         // In-memory Shopping Cart State
         let cart = [];
+
+        // Select stool variant (2.5 FT, 4.5 FT, 7 FT)
+        function selectStoolVariant(title, price, heightLabel) {
+            selectedStool.title = title;
+            selectedStool.price = price;
+            selectedStool.heightLabel = heightLabel;
+
+            // Update UI elements
+            const titleElem = document.getElementById('p1TitleDisplay');
+            const priceElem = document.getElementById('p1PriceDisplay');
+            const specElem = document.getElementById('p1HeightSpec');
+
+            if (titleElem) titleElem.textContent = `${heightLabel} Stool`;
+            if (priceElem) priceElem.textContent = `₹${price.toLocaleString('en-IN')}`;
+            if (specElem) specElem.textContent = `${heightLabel} (${heightLabel === '2.5 FT' ? 'Low Profile Bench' : heightLabel === '4.5 FT' ? 'Standard Height' : 'Extra Tall Tower'})`;
+
+            // Update buttons styling
+            const allBtns = document.querySelectorAll('.stool-variant-btn');
+            allBtns.forEach(btn => {
+                btn.className = 'stool-variant-btn py-2 px-1.5 rounded-lg border border-[#242F42] bg-[#161C27] hover:border-amber-500/60 text-center transition flex flex-col items-center';
+            });
+
+            const activeBtnKey = heightLabel.replace(' FT', '');
+            const activeBtn = document.getElementById(`btnVariant-${activeBtnKey}`);
+            if (activeBtn) {
+                activeBtn.className = 'stool-variant-btn py-2 px-1.5 rounded-lg border-2 border-amber-500 bg-amber-500/10 text-center transition flex flex-col items-center shadow-lg shadow-amber-500/10';
+            }
+        }
+
+        // Add selected stool variant to cart
+        function addSelectedStoolToCart() {
+            addToCart(selectedStool.title, selectedStool.price, selectedStool.image);
+        }
+
+        // Open instant checkout for selected stool variant
+        function orderSelectedStoolNow() {
+            openInstantOrder(selectedStool.title, selectedStool.price);
+        }
 
         // Helper to show notification toasts
         function showNotification(message) {
@@ -507,7 +686,8 @@
                     image: image,
                     quantity: 1,
                     withPainting: false,
-                    paintColor: 'Industrial Gloss Black'
+                    paintColor: 'Gloss Black',
+                    paintHex: '#111827'
                 });
             }
             updateCartUI();
@@ -524,7 +704,8 @@
                     image: '',
                     quantity: 1,
                     withPainting: false,
-                    paintColor: 'Industrial Gloss Black'
+                    paintColor: 'Gloss Black',
+                    paintHex: '#111827'
                 });
             }
             updateCartUI();
@@ -548,10 +729,25 @@
             updateCartUI();
         }
 
-        // Change paint color selection
-        function changePaintColor(index, color) {
+        // Change paint color selection from palette
+        function changePaintColor(index, colorName, hexCode) {
             if (!cart[index]) return;
-            cart[index].paintColor = color;
+            cart[index].paintColor = colorName;
+            cart[index].paintHex = hexCode;
+            updateCartUI();
+        }
+
+        // Custom hex color picker update
+        function handleCustomColorInput(index, hexValue) {
+            if (!cart[index]) return;
+            cart[index].paintHex = hexValue;
+            cart[index].paintColor = `Custom Shade (${hexValue.toUpperCase()})`;
+            
+            // Live-update color label & preview badge without redrawing the whole tree
+            const labelElem = document.getElementById(`selectedColorLabel-${index}`);
+            const previewDot = document.getElementById(`selectedColorDot-${index}`);
+            if (labelElem) labelElem.textContent = cart[index].paintColor;
+            if (previewDot) previewDot.style.backgroundColor = hexValue;
         }
 
         // Remove completely
@@ -609,19 +805,10 @@
             container.innerHTML = cart.map((item, index) => {
                 const itemBaseTotal = item.price * item.quantity;
                 const itemPaintingCost = item.withPainting ? (PAINTING_CHARGE_PER_PIECE * item.quantity) : 0;
-
-                const colorOptions = [
-                    'Industrial Gloss Black',
-                    'Signal Red',
-                    'Safety Yellow',
-                    'Industrial Blue',
-                    'Forest Green',
-                    'Silver Metallic',
-                    'Dark Charcoal Grey'
-                ];
+                const currentColorHex = item.paintHex || '#111827';
 
                 return `
-                <div class="p-3.5 rounded-xl bg-[#0B0F17] border border-[#242F42] space-y-3">
+                <div class="p-4 rounded-xl bg-[#0B0F17] border border-[#242F42] space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="flex-1 pr-2">
                             <h5 class="text-sm font-semibold text-white uppercase">${item.title}</h5>
@@ -639,8 +826,8 @@
                         </div>
                     </div>
 
-                    <!-- Optional Painting Checkbox & Color Selector -->
-                    <div class="pt-2 border-t border-[#242F42]/60 space-y-2 bg-[#161C27]/50 p-2.5 rounded-lg">
+                    <!-- Optional Painting Section (Exclusive to Order Drawer) -->
+                    <div class="pt-2 border-t border-[#242F42]/60 space-y-2 bg-[#161C27]/60 p-3 rounded-xl">
                         <div class="flex items-center justify-between">
                             <label class="flex items-center gap-2 cursor-pointer select-none">
                                 <input 
@@ -648,8 +835,8 @@
                                     onchange="togglePainting(${index})" 
                                     ${item.withPainting ? 'checked' : ''} 
                                     class="w-4 h-4 rounded border-[#242F42] text-amber-500 bg-[#0B0F17] focus:ring-0 focus:ring-offset-0 cursor-pointer accent-amber-500">
-                                <span class="text-xs text-slate-300 flex items-center gap-1.5">
-                                    <i data-lucide="palette" class="w-3.5 h-3.5 text-amber-400"></i> Add Custom Painting (+₹100/pc)
+                                <span class="text-xs text-slate-200 font-medium flex items-center gap-1.5">
+                                    <i data-lucide="palette" class="w-3.5 h-3.5 text-amber-400"></i> Add Custom Painting (+₹200/pc)
                                 </span>
                             </label>
                             <span class="text-xs font-bold ${item.withPainting ? 'text-amber-400' : 'text-slate-500'}">
@@ -657,24 +844,73 @@
                             </span>
                         </div>
 
-                        <!-- Dropdown for Paint Color (Shown when painting is enabled) -->
+                        <!-- All Colors in the World Selection Panel -->
                         ${item.withPainting ? `
-                        <div class="pt-2 border-t border-[#242F42]/40 flex items-center justify-between gap-2">
-                            <label class="text-[11px] text-slate-400 shrink-0 flex items-center gap-1">
-                                <i data-lucide="paint-bucket" class="w-3 h-3 text-amber-400"></i> Paint Color:
-                            </label>
-                            <select 
-                                onchange="changePaintColor(${index}, this.value)" 
-                                class="bg-[#0B0F17] border border-[#242F42] text-xs text-white rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500">
-                                ${colorOptions.map(col => `
-                                    <option value="${col}" ${item.paintColor === col ? 'selected' : ''}>${col}</option>
-                                `).join('')}
-                            </select>
+                        <div class="pt-3 border-t border-[#242F42]/60 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5">
+                                    <span id="selectedColorDot-${index}" class="w-3 h-3 rounded-full border border-white/20 inline-block" style="background-color: ${currentColorHex}"></span>
+                                    Selected Color:
+                                </span>
+                                <span id="selectedColorLabel-${index}" class="text-[11px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md truncate max-w-[190px]">
+                                    ${item.paintColor}
+                                </span>
+                            </div>
+
+                            <!-- Curated 24 Popular Colors in the World -->
+                            <div>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-slate-400 block mb-1.5">
+                                    Pick A Standard Color (24 Options):
+                                </span>
+                                <div class="grid grid-cols-8 gap-1.5 p-2 bg-[#0B0F17] rounded-lg border border-[#242F42]">
+                                    ${EXPANDED_PALETTE.map(c => {
+                                        const isSelected = item.paintColor === c.name;
+                                        const checkColor = c.textDark ? 'text-black' : 'text-white';
+                                        return `
+                                        <button 
+                                            type="button"
+                                            title="${c.name}"
+                                            onclick="changePaintColor(${index}, '${c.name.replace(/'/g, "\\'")}', '${c.hex}')" 
+                                            class="group relative w-6 h-6 sm:w-7 sm:h-7 rounded-md flex items-center justify-center transition-all duration-150 transform active:scale-90 ${isSelected ? 'ring-2 ring-offset-1 ring-amber-400 ring-offset-[#0B0F17] scale-110 shadow-lg z-10' : 'hover:scale-110 hover:ring-1 hover:ring-slate-300'}"
+                                            style="background-color: ${c.hex}; border: 1px solid ${c.border};">
+                                            
+                                            ${isSelected ? `
+                                                <i data-lucide="check" class="w-3 h-3 ${checkColor} stroke-[3]"></i>
+                                            ` : ''}
+
+                                            <span class="pointer-events-none absolute bottom-full mb-1 left-1/2 -translate-x-1/2 hidden group-hover:block bg-black/95 text-[9px] text-white px-1.5 py-0.5 rounded whitespace-nowrap z-30 shadow border border-slate-700">
+                                                ${c.name}
+                                            </span>
+                                        </button>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Universal Color Wheel: Any Color in the World -->
+                            <div class="p-2.5 rounded-lg bg-[#0B0F17] border border-[#242F42] flex items-center justify-between gap-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="relative w-8 h-8 rounded-lg overflow-hidden border border-amber-500/50 flex items-center justify-center cursor-pointer shadow">
+                                        <input 
+                                            type="color" 
+                                            value="${currentColorHex}" 
+                                            onchange="handleCustomColorInput(${index}, this.value)"
+                                            class="absolute -inset-2 w-12 h-12 cursor-pointer bg-transparent border-0 opacity-100">
+                                    </div>
+                                    <div>
+                                        <span class="text-xs font-bold text-white block">Custom Color Wheel</span>
+                                        <span class="text-[10px] text-slate-400 block">Click square to pick any shade in the world</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-mono font-semibold px-2 py-1 rounded bg-[#161C27] text-amber-400 border border-[#242F42]">
+                                    ${currentColorHex.toUpperCase()}
+                                </span>
+                            </div>
                         </div>
                         ` : ''}
                     </div>
                 </div>
-            `;
+                `;
             }).join('');
 
             lucide.createIcons();
@@ -738,8 +974,9 @@
                 subtotal += itemSub;
                 totalPainting += paintingCost;
 
+                const colorDetails = `${item.paintColor || 'Gloss Black'} (${item.paintHex || '#111827'})`;
                 const paintStatus = item.withPainting 
-                    ? `[🎨 With Painting: +₹${paintingCost} (₹100/pc) | Color: ${item.paintColor || 'Industrial Gloss Black'}]` 
+                    ? `[🎨 With Painting: +₹${paintingCost} (₹200/pc) | Color: ${colorDetails}]` 
                     : `[Standard / No Extra Paint]`;
 
                 itemsSummary += `  ${idx + 1}. ${item.title} (Qty: ${item.quantity}) - ₹${itemSub}\n     ↳ ${paintStatus}\n`;
@@ -748,7 +985,7 @@
             const deliveryFee = DELIVERY_CHARGE;
             const finalTotal = subtotal + totalPainting + deliveryFee;
 
-            // Clean, professional WhatsApp message formatting with color option, delivery, painting and total breakdown
+            // WhatsApp message formatting with complete breakdown and custom color specs
             const message = 
 `Hello Custom Workshop, I would like to place an order:
 
